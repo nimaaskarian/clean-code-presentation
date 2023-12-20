@@ -1,0 +1,4 @@
+https://en.wikipedia.org/wiki/Broken_windows_theory
+https://www.osnews.com/story/19266/wtfsm/
+https://refactoring.guru/
+https://refactoring.guru/refactoring/smells/oo-abusers
