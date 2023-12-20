@@ -35,7 +35,7 @@
     keywordstyle=\color{magenta},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
-    basicstyle=\fontspec{JetBrains Mono Regular}\footnotesize,
+    basicstyle=\fontspec{JetBrains Mono Regular}\scriptsize,
     breakatwhitespace=false,
     breaklines=true,
     captionpos=b,
@@ -329,59 +329,133 @@ So we have to add those details into our "prompt"
     Prefixing all the classes with \textit{BW} would be a bad idea.
   }
 \end{frame}
+\subsection{example}
 \begin{frame}[fragile]
-  \begin{lstlisting}[language=Python]
-import math
-i1 = int(input())
-i2 = int(input())
-i3 = int(input())
-print(math.sqrt(i1**2, i2**2, i3**2))
-print(i1*i2*i3)
-print(2*(i1*i2 + i1*i3 + i2*i3))\end{lstlisting}
+  \begin{lstlisting}[language=C++]
+#include <cmath>
+#include <iostream>
+
+int main () {
+  int i1, i2, i3;
+  std::cin >> i1 >> i2 >> i3;
+  std::cout << sqrt(pow(i1, 2)+pow(i2, 2)+pow(i3, 2)) << '\n';
+  std::cout << i1*i2*i3 << '\n';
+  std::cout << 2*(i1*i2 + i1*i3 + i2*i3) << '\n';
+  return 0;
+}
+// import math
+// i1 = int(input())
+// i2 = int(input())
+// i3 = int(input())
+// print(math.sqrt(i1**2, i2**2, i3**2))
+// print(i1*i2*i3)
+// print(2*(i1*i2 + i1*i3 + i2*i3))\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-  \begin{lstlisting}[language=Python]
-import math
+  \begin{lstlisting}[language=C++]
+#include <cmath>
+#include <iostream>
 
-height = int(input())
-width = int(input())
-depth = int(input())
+int main () {
+  int height, width, depth;
+  std::cin >> height >> width >> depth;
 
-print(math.sqrt(height**2, width**2, depth**2))
-print(height*width*depth)
-print(2 * (height*width + height*depth + depth*width))\end{lstlisting}
+  std::cout << 
+    sqrt(pow(height, 2)+pow(width, 2)+pow(depth, 2)) << '\n';
+
+  std::cout << height*width*depth << '\n';
+  std::cout << 
+    2*(height*width + height*depth + width*depth) << '\n';
+
+  return 0;
+}
+// import math
+// height = int(input())
+// width = int(input())
+// depth = int(input())
+// print(math.sqrt(height**2, width**2, depth**2))
+// print(height*width*depth)
+// print(2 * (height*width + height*depth + depth*width))\end{lstlisting}
 \end{frame}
+
 \section{Functions}
 \begin{frame}{Functions}
   Rules around functions
-  \begin{itemize}
-    \item Should be small
-    \item Should do one thing
-    \item One level of abstraction per funciton
-  \end{itemize}
   \note{
     Functions are one of the oldest thing that we still have in early programming days.\\
   }
-  \note[item]{
-    They can divide complicated logic into multiple simple parts.
-  }
-  \note[item]{
-    if a function is complicated, break down into multiple functions
-  }
-  \note[item]{
-    We want the code to read like a top-down narrative
-  }
-  \note[item]{
-    Give that simple parts proper context
-  }
-  \note[item]{
-    Should be named very well, and if the name includes "and", they are probably not doing one and one thing only.
-  }
-  \note[item]{ 
-    use static factories instead of switch cases switch cases. switch case must be burried into one function
-  }
+  \begin{itemize}[<+->]
+    \item Should be small
+    \note[item]<.>{
+      Divide complicated logic into multiple simple parts.
+    }
+    \item Should do one thing
+    \note[item]<.>{
+      if a function is complicated, break down into multiple functions
+    }
+    \item One level of abstraction per funciton
+    \note[item]<.>{
+      We want the code to read like a top-down narrative
+    }
+    \note[item]<.>{
+      Give that simple parts proper context
+    }
+    \note[item]<.>{
+      use static factories instead of switch cases switch cases. switch case must be burried into one function
+    }
+    \item Should have descriptive names
+    \note[item]<.>{
+      Should be named very well, and if the name includes "and", they are probably not doing one and one thing only.
+    }
+    \note[item]<.>{
+      Don't be afraid of long names
+    }
+    \note[item]<.>{
+      Don't be afraid to spend time choosing a name
+    }
+    \item Should have minimum arguments
+    \note[item]<.>{ 
+      zero is the best. one is good, closely comes two.\\
+      Three arguments should be avoided when possible\\
+      More than three SHOULDN'T BE USED \\ 
+      Output arguments SHOULD NOT BE USED \\
+      because it makes the code confusing
+    }
+    \item Have no side effects
+    \note[item]<.>{ 
+      side effect: it does things that doesn't say it will do
+    }
+  \end{itemize}
 \end{frame}
 
+\subsection{example}
+\begin{frame}[fragile]
+  \begin{lstlisting}[language=C++]
+#include <cmath>
+#include <iostream>
+
+double cuboid_surface(int height, int width, int depth) {
+  return 2*(height*width + height*depth + width*depth);
+}
+
+double cuboid_volume(int height, int width, int depth) {
+  return height * width * depth;
+}
+
+double cuboid_diagonal(int height, int width, int depth) {
+  return sqrt(pow(height, 2)+pow(width, 2)+pow(depth, 2));
+}
+
+int main () {
+  int height, width, depth;
+  std::cin >> height >> width >> depth;
+  std::cout << cuboid_diagonal(height, width, depth) << '\n';
+  std::cout << cuboid_volume(height, width, depth) << '\n';
+  std::cout << cuboid_surface(height, width, depth) << '\n';
+  return 0;
+} \end{lstlisting}
+
+\end{frame}
 \begin{frame}[fragile]
   \begin{lstlisting}[language=Python]
 def cuboid_surface(height, width, depth):
@@ -397,8 +471,133 @@ height = int(input())
 width = int(input())
 depth = int(input())
 
+print(cuboid_diagonal(height, width, depth))
 print(cuboid_volume(height, width, depth))
 print(cuboid_surface(height, width, depth))\end{lstlisting}
 
+\end{frame}
+
+\section{Objects and Data structures}
+\subsection{Data structures}
+\begin{frame}{Data structures}
+  \note{
+    makes it EASY to add new functions without changing the existing data structure \\
+    makes it HARD to add new data structures because all the functions must change. \\
+  }
+  Simple data structures are good at modularity. They have no behavior or operation by their own.
+  \begin{itemize}
+    \item Only expose data, not operation
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+  \begin{lstlisting}[language=C++]
+#include <cmath>
+#include <iostream>
+
+class Cuboid {
+public:
+  int height, width, depth;
+  Cuboid(int height, int width, int depth) {
+    this->height = height;
+    this->width = width;
+    this->depth = depth;
+  }
+};
+
+double cuboid_surface(Cuboid cuboid) {
+  return 2*(cuboid.height*cuboid.width 
+    + cuboid.height*cuboid.depth 
+    + cuboid.width*cuboid.depth);
+}
+
+double cuboid_volume(Cuboid cuboid) {
+  return cuboid.height * cuboid.width * cuboid.depth;
+}
+
+double cuboid_diagonal(Cuboid cuboid) {
+  return sqrt(pow(cuboid.height, 2)+pow(cuboid.width, 2)+pow(cuboid.depth, 2));
+}
+
+ \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+  \begin{lstlisting}[language=C++]
+int main () {
+  int height, width, depth;
+  std::cin >> height >> width >> depth;
+  Cuboid cuboid = Cuboid(height, width, depth);
+  std::cout << cuboid_diagonal(cuboid) << '\n';
+  std::cout << cuboid_volume(cuboid) << '\n';
+  std::cout << cuboid_surface(cuboid) << '\n';
+  return 0;
+} \end{lstlisting}
+\end{frame}
+\subsection{Objects}
+\begin{frame}{Objects}
+  Objects are good at data abstraction. They hide the details and only expose operation.
+  \note{
+    makes it EASY to add new classes without changing existing functions \\
+    makes it HARD to add new functions because all the classes must change\\
+  }
+  \begin{itemize}[<+->]
+    \item Use abstract functions. 
+      \note[item]<.>{
+        don't use getter setters. expose high level operations.
+      }
+      \note[item]<.>{
+        example of bingewatcher and percentage
+      }
+    \item Don't expose data
+      \note[item]<.>{
+        again, no getter setters. protected or private.
+      }
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+  \begin{lstlisting}[language=C++]
+#include <cmath>
+#include <iostream>
+class Cuboid {
+private:
+  int height, width, depth;
+public:
+  Cuboid(int height, int width, int depth) {
+    this->height = height;
+    this->width = width;
+    this->depth = depth;
+  }
+  double surface() {
+    return 2*(height*width + height*depth + width*depth);
+  }
+  double volume() {
+    return height * width * depth;
+  }
+  double diagonal() {
+    return sqrt(pow(height, 2)+pow(width, 2)+pow(depth, 2));
+  }
+};\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+  \begin{lstlisting}[language=C++]
+int main () {
+  int height, width, depth;
+  std::cin >> height >> width >> depth;
+  Cuboid cuboid = Cuboid(height, width, depth);
+  std::cout << cuboid.diagonal() << '\n';
+  std::cout << cuboid.volume() << '\n';
+  std::cout << cuboid.surface() << '\n';
+} \end{lstlisting}
+\end{frame}
+\subsection{Hybrids}
+\begin{frame}{Hybrids}
+  Hybrids are when you expose both data and operation. This will become a mess to deal with.\\
+  DON'T USE HYBRIDS
+  \note{
+    makes it HARD to add new functions because all the classes must change\\
+    makes it HARD to add new data structures because all the functions must change. \\
+  }
+\end{frame}
+\begin{frame}
+  Thanks for begin awake!
 \end{frame}
 \end{document}
